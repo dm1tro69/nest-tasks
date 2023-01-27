@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  db_prisma:
+    image: postgres:13.5
+    restart: always
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: nestjs
+    volumes:
+      - postgres:/var/lib/postgresql/data
+volumes:
+  postgres:
