@@ -20,6 +20,14 @@ model Tasks{
   status TaskStatus @default(OPEN)
 
 }
+model User{
+  id Int @id @default(autoincrement())
+
+  username String @unique
+
+  password String
+}
+
 enum TaskStatus {
   OPEN
   IN_PROGRESS

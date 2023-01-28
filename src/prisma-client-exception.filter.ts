@@ -13,7 +13,7 @@ export class PrismaClientExceptionFilter extends BaseExceptionFilter{
       case 'P2002':
         response.status(HttpStatus.CONFLICT).json({
           statusCode: HttpStatus.CONFLICT,
-          message
+          message: "NOO"
         })
         break
       default:

@@ -1,10 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseFilters } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseFilters, UseGuards } from "@nestjs/common";
 import { TasksService } from "./tasks.service";
 import { PrismaClientExceptionFilter } from "../prisma-client-exception.filter";
 import { TasksDto } from "./dto/tasks.dto";
+import { Tasks} from "@prisma/client";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller('tasks')
 @UseFilters(PrismaClientExceptionFilter)
+@UseGuards(AuthGuard())
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
@@ -30,7 +33,7 @@ export class TasksController {
   }
 
   @Patch(':id')
-  updateTaskStatus(@Param('id') id: number, @Body() dto: TasksDto){
-    return this.tasksService.updateTaskStatus(id, dto)
+  updateTaskStatus(@Param('id') id: number, @Body() dto: Tasks){
+    return this.tasksService.updateTaskStatus(+id, dto)
   }
 }
